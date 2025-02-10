@@ -1,0 +1,14 @@
+###
+GET http://localhost:4004/
+
+
+### 
+POST http://localhost:4004/auth/register
+Content-Type: application/x-www-form-urlencoded
+
+{
+    "email": "test@test.com",
+    "password": "123456",
+    "confirmPassword": "1234561"
+}
+

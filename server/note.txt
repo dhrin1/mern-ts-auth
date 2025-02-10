@@ -1,0 +1,4 @@
+npm i bcrypt cookie-parser cors dotenv express joi jsonwebtoken mongoose resend
+npm i -D @types/bcrypt @types/cookie-parser @types/cors @types/express @types/jsonwebtoken ts-node-dev typescript
+
+npx tsc --init
