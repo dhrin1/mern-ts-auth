@@ -23,7 +23,6 @@ const handleAppError = (res: Response, error: AppError) => {
 
 const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
   console.error(`PATH: ${req.path}`, error);
-
   if (error instanceof z.ZodError) {
     handleZodError(res, error);
   }

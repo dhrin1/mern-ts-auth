@@ -6,7 +6,7 @@ import connectToDatabase from "./config/db";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middleware/errorHandler";
 import { OK } from "./constants/https";
-import { APP_ORIGIN, NODE_ENV, PORT } from "./constants/env";
+import { NODE_ENV, PORT } from "./constants/env";
 import authRoutes from "./routes/auth.route";
 
 const app = express();
