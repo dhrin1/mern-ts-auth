@@ -8,7 +8,12 @@ import jwt from "jsonwebtoken";
 import { JWT_REFRESH_SECRET, JWT_SECRET } from "../constants/env";
 import { CONFLICT, UNAUTHORIZED } from "../constants/https";
 import { oneYearFromNow } from "../utils/date";
-import { refreshTokenSignOptions, signToken } from "../utils/jwt";
+import {
+  RefreshTokenPayload,
+  refreshTokenSignOptions,
+  signToken,
+  verifyToken,
+} from "../utils/jwt";
 
 export type CreateAccountParams = {
   email: string;
@@ -88,4 +93,16 @@ export const loginUser = async ({
     accessToken,
     refreshToken,
   };
+};
+
+export const refreshUserAccessToken = async (refreshToken: string) => {
+  const { payload } = verifyToken<RefreshTokenPayload>(refreshToken, {
+    secret: refreshTokenSignOptions.secret,
+  });
+  appAssert(payload, UNAUTHORIZED, "Invalid refresh token");
+
+  const session = await SessionModel.findById(payload.sessionId);
+  appAssert(session, UNAUTHORIZED, "Session expired");
+
+  // const sessionNeedssRefresh  = session.expiredAt.getTime() -
 };

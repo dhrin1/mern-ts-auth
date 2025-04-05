@@ -1,10 +1,11 @@
 import catchErrors from "../utils/catchErrors";
 import { createAccount, loginUser } from "../services/auth.service";
-import { CREATED, OK } from "../constants/https";
+import { CREATED, OK, UNAUTHORIZED } from "../constants/https";
 import { clearAuthCookies, setAuthCookies } from "../utils/cookies";
 import { registerSchema, loginSchema } from "./auth.schema";
 import { verifyToken } from "../utils/jwt";
 import SessionModel from "../models/session.model";
+import appAssert from "../utils/appAssert";
 
 export const registerHandler = catchErrors(async (req, res) => {
   const request = registerSchema.parse({
@@ -42,4 +43,9 @@ export const logoutHandler = catchErrors(async (req, res) => {
   return clearAuthCookies(res).status(OK).json({
     message: "Logout successful.",
   });
+});
+
+export const refreshHandler = catchErrors(async (req, res) => {
+  const refreshToken = req.cookies.refreshToken as string | undefined;
+  appAssert(refreshToken, UNAUTHORIZED, "Missing refresh token");
 });
