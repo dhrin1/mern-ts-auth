@@ -25,3 +25,7 @@ User-Agent: "res-client"
    "password": "123456"
 }
 
+
+###
+POST http://localhost:4004/auth/logout
+User-Agent: "res-client"
