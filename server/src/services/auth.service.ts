@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import { JWT_REFRESH_SECRET, JWT_SECRET } from "../constants/env";
 import { CONFLICT, UNAUTHORIZED } from "../constants/https";
 import { oneYearFromNow } from "../utils/date";
+import { refreshTokenSignOptions, signToken } from "../utils/jwt";
 
 export type CreateAccountParams = {
   email: string;
@@ -27,28 +28,22 @@ export const createAccount = async (data: CreateAccountParams) => {
     password: data.password,
   });
 
+  const userId = user._id;
+
   const verificationCode = await VerificationCodeModel.create({
-    userId: user._id,
+    userId,
     type: VeriricationCodeType.EmailVerification,
     expiresAt: oneYearFromNow(),
   });
 
   const session = await SessionModel.create({
-    userId: user._id,
+    userId,
     userAgent: data.userAgent,
   });
 
-  const refreshToken = jwt.sign(
-    { sessionId: session._id },
-    JWT_REFRESH_SECRET,
-    { audience: ["user"], expiresIn: "30d" }
-  );
+  const refreshToken = signToken({ sessionId: session._id });
 
-  const accessToken = jwt.sign(
-    { userId: user._id, sessionId: session._id },
-    JWT_SECRET,
-    { audience: ["user"], expiresIn: "15min" }
-  );
+  const accessToken = signToken({ userId, sessionId: session._id });
 
   return {
     user: user.omitPassword(),
@@ -69,11 +64,13 @@ export const loginUser = async ({
   userAgent,
 }: LoginUserParams) => {
   const user = await UserModel.findOne({ email });
+
   appAssert(user, UNAUTHORIZED, "Invalid email or password");
 
   const isValid = await user.comparePassword(password);
 
   appAssert(isValid, UNAUTHORIZED, "Invalid email or password");
+
   const userId = user._id;
 
   const session = await SessionModel.create({ userId, userAgent });
@@ -82,16 +79,9 @@ export const loginUser = async ({
     sessionId: session._id,
   };
 
-  const refreshToken = jwt.sign(sessionInfo, JWT_REFRESH_SECRET, {
-    audience: ["user"],
-    expiresIn: "30d",
-  });
+  const refreshToken = signToken(sessionInfo, refreshTokenSignOptions);
 
-  const accessToken = jwt.sign(
-    { ...sessionInfo, userId: user._id },
-    JWT_SECRET,
-    { audience: ["user"], expiresIn: "15min" }
-  );
+  const accessToken = signToken({ ...sessionInfo, userId: user._id });
 
   return {
     user: user.omitPassword(),

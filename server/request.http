@@ -9,7 +9,7 @@ Content-Type: application/json
 User-Agent: "res-client"
 
 {
-    "email": "test8q@gmail.com",
+    "email": "test22522@gmail.com",
     "password": "123456",
     "confirmPassword": "123456"
 }
@@ -21,7 +21,7 @@ Content-Type: application/json
 User-Agent: "res-client"
 
 {
-   "email": "test8q@gmail.com",
+   "email": "test225@gmail.com",
    "password": "123456"
 }
 
