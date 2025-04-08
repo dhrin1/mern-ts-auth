@@ -9,7 +9,7 @@ Content-Type: application/json
 User-Agent: "res-client"
 
 {
-    "email": "test22522@gmail.com",
+    "email": "test@gmail.com",
     "password": "123456",
     "confirmPassword": "123456"
 }
@@ -21,11 +21,20 @@ Content-Type: application/json
 User-Agent: "res-client"
 
 {
-   "email": "test225@gmail.com",
+   "email": "test@gmail.com",
    "password": "123456"
 }
 
 
 ###
 POST http://localhost:4004/auth/logout
+User-Agent: "res-client"
+
+
+###
+GET http://localhost:4004/auth/refresh
+User-Agent: "res-client"
+
+###
+GET http://localhost:4004/auth/email/verify/67f52ba7fa165d089083a7b7
 User-Agent: "res-client"

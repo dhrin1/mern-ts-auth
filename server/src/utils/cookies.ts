@@ -11,12 +11,12 @@ const defaults: CookieOptions = {
 
 export const REFRESH_PATH = "/auth/refresh";
 
-const getAccessTokenCookieOptions = (): CookieOptions => ({
+export const getAccessTokenCookieOptions = (): CookieOptions => ({
   ...defaults,
   expires: fifteenMinutesFromNow(),
 });
 
-const refreshTokenCookieOptions = (): CookieOptions => ({
+export const refreshTokenCookieOptions = (): CookieOptions => ({
   ...defaults,
   expires: thirtyDaysFromNow(),
   path: REFRESH_PATH,
