@@ -9,7 +9,7 @@ Content-Type: application/json
 User-Agent: "res-client"
 
 {
-    "email": "test@gmail.com",
+    "email": "test1@gmail.com",
     "password": "123456",
     "confirmPassword": "123456"
 }
@@ -36,5 +36,25 @@ GET http://localhost:4004/auth/refresh
 User-Agent: "res-client"
 
 ###
-GET http://localhost:4004/auth/email/verify/67f52ba7fa165d089083a7b7
+GET http://localhost:4004/auth/email/verify/67f53209a10fc558dae88046
 User-Agent: "res-client"
+
+
+###
+POST http://localhost:4004/auth/password/forgot
+Content-Type: application/json
+User-Agent: "res-client"
+
+{
+    "email": "test@gmail.com"
+}
+
+###
+POST http://localhost:4004/auth/password/reset
+Content-Type: application/json
+User-Agent: "res-client"
+
+{
+    "verificationCode": "67f7c6df0a07483d77140fb3",
+    "password": "123456"
+}
