@@ -8,6 +8,9 @@ import errorHandler from "./middleware/errorHandler";
 import { OK } from "./constants/https";
 import { NODE_ENV, PORT } from "./constants/env";
 import authRoutes from "./routes/auth.route";
+import authenticate from "./middleware/authenticate";
+import userRoutes from "./routes/user.routes";
+import sessionRoutes from "./routes/session.route";
 
 const app = express();
 app.use(express.json());
@@ -28,6 +31,8 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/user", authenticate, userRoutes);
+app.use("/session", authenticate, sessionRoutes);
 
 app.use(errorHandler);
 

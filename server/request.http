@@ -1,9 +1,7 @@
-###
+### helth check
 GET http://localhost:4004/
 
-
-
-###
+### register
 POST http://localhost:4004/auth/register
 Content-Type: application/json
 User-Agent: "res-client"
@@ -14,8 +12,7 @@ User-Agent: "res-client"
     "confirmPassword": "123456"
 }
 
-
-###
+### login
 POST http://localhost:4004/auth/login
 Content-Type: application/json
 User-Agent: "res-client"
@@ -25,36 +22,50 @@ User-Agent: "res-client"
    "password": "123456"
 }
 
-
-###
+### logout
 POST http://localhost:4004/auth/logout
 User-Agent: "res-client"
 
 
-###
+### refresh token
 GET http://localhost:4004/auth/refresh
 User-Agent: "res-client"
 
-###
-GET http://localhost:4004/auth/email/verify/67f53209a10fc558dae88046
+### email verification
+GET http://localhost:4004/auth/email/verify/67f9c8980676ec9672ffe639
 User-Agent: "res-client"
 
 
-###
+### forgot-password
 POST http://localhost:4004/auth/password/forgot
 Content-Type: application/json
 User-Agent: "res-client"
 
 {
-    "email": "test@gmail.com"
+    "email": "alhdrin97@gmail.com"
 }
 
-###
+### reset password
 POST http://localhost:4004/auth/password/reset
 Content-Type: application/json
 User-Agent: "res-client"
 
 {
-    "verificationCode": "67f7c6df0a07483d77140fb3",
-    "password": "123456"
+    "verificationCode": "67f7cf046a72025283fb9200",
+    "password": "111111"
 }
+
+### get user details
+GET http://localhost:4004/user
+Content-Type: application/json
+User-Agent: "res-client"
+
+### get all sessions
+GET http://localhost:4004/session
+Content-Type: application/json
+User-Agent: "res-client"
+
+### delete session
+DELETE  http://localhost:4004/session/
+Content-Type: application/json
+User-Agent: "res-client"
