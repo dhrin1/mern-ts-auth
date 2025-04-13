@@ -15,9 +15,21 @@ import sessionRoutes from "./routes/session.route";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://your-production-url.com",
+];
+
 app.use(
   cors({
-    origin: ["*"],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );

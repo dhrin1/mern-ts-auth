@@ -66,6 +66,6 @@ Content-Type: application/json
 User-Agent: "res-client"
 
 ### delete session
-DELETE  http://localhost:4004/session/
+DELETE  http://localhost:4004/session/67f9fc7d641db4baa6d5a53c
 Content-Type: application/json
 User-Agent: "res-client"
