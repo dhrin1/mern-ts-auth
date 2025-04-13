@@ -1,0 +1,3 @@
+npm create vite@latest "project folder" --template react-ts
+npm i react-router-dom  @tanstack/react-query @tanstack/react-query-devtools axios
+// tailwid css https://tailwindcss.com/docs/installation/using-vite
