@@ -46,7 +46,7 @@ export default function Login() {
                   Invalid email or passsword
                 </p>
               )}
-              <div className="grid">
+              <div className="grid gap-y-1 ">
                 <label htmlFor="email" className="text-sm">
                   Email address
                 </label>
@@ -56,10 +56,10 @@ export default function Login() {
                   name="email"
                   placeholder="Email"
                   onChange={handleInputChange}
-                  className="rounded border h-10 px-2 placeholder:text-sm"
+                  className="rounded border-2 border-gray-200 h-10 px-2 placeholder:text-sm focus:border-blue-500"
                 />
               </div>
-              <div className="grid">
+              <div className="grid gap-y-1">
                 <label htmlFor="password" className="text-sm">
                   Password
                 </label>
@@ -73,7 +73,7 @@ export default function Login() {
                     e.key === "Enter" &&
                     signIn({ email: input.email, password: input.password })
                   }
-                  className="rounded border h-10 px-2 placeholder:text-sm"
+                  className="rounded border-2 border-gray-200 h-10 px-2 placeholder:text-sm focus:border-blue-500"
                 />
               </div>
               <Link
